@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}CSV Address Book Upload Preview{% endblock %}
+
+{% block content %}
+<form enctype="text/plain" method="post">
+    {% csrf_token %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if contacts.has_previous %}
+                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+    <ul class="contacts">
+    {% for contact in contacts %}
+        <li {% if contact.delete %}class="del"{% endif %}>
+            {{ contact.name }}<br/>
+            {{ contact.addr }}<br/>
+            {{ contact.city }}, {{ contact.state }} {{ contact.zip }} {{ contact.country }}<br/>
+            {{ contact.phone_number }}<br/>
+            {% if contact.delete %}<a href="?page={{ contacts.number }}&undel={{ contact.number }}">Undelete</a>
+            {% else %}<a href="?page={{ contacts.number }}&del={{ contact.number }}">Delete</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if contacts.has_previous %}
+                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
+            </span>
+
+            {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+    <button title="Save" type="submit">Save</button>
+</form>
+{% endblock %}

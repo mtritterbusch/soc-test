@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}CSV Address Book Uploader{% endblock %}
+
+{% block content %}
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button title="Upload" type="submit">Upload</button>
+</form>
+{% endblock %}

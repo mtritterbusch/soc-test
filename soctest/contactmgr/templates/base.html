@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'base.css' %}" />
+    {% block branding_style %}{% endblock %}
+    <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+</head>
+<body>
+<div id="content">
+    {% block content %}CONTENT GOES HERE{% endblock %}
+</div>
+</body>
+</html>
